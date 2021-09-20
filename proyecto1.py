@@ -50,7 +50,7 @@ def graficar():
     agrafica=open("Grafica.dot","w")
     gtitulo='''digraph structs {
 	node [shape=plaintext]
-	struct3 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7">
+	struct3 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="50">
     '''
 
     agrafica.write(gtitulo+'\n')

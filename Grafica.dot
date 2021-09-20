@@ -1,6 +1,6 @@
 digraph structs {
 	node [shape=plaintext]
-	struct3 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7">
+	struct3 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="50">
     
 <TR>
 <TD></TD> 
@@ -93,7 +93,7 @@ digraph structs {
 <TD bgcolor="#000000"></TD> 
 </TR>
 <TR>
-<TD bgcolor="#000000"></TD> 
+<TD></TD> 
 <TD bgcolor="#000000"></TD> 
 <TD></TD> 
 <TD></TD> 
@@ -111,7 +111,7 @@ digraph structs {
 <TD bgcolor="#000000"></TD> 
 </TR>
 <TR>
-<TD bgcolor="#000000"></TD> 
+<TD></TD> 
 <TD bgcolor="#FFFFFF"></TD> 
 <TD></TD> 
 <TD bgcolor="#00FF00"></TD> 
