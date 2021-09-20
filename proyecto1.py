@@ -19,10 +19,15 @@ def cargar():
     archivo.close()
     cadena2=cadena.split(";")
     filass=cadena2[3]
+    filass=filass.replace(" ","")
+    filass=filass.replace("FILAS=","")
     columnass=cadena2[4]
+    columnass=columnass.replace(" ","")
+    columnass=columnass.replace("COLUMNAS=","")
 
-    filas=filass
-    columnas=columnass
+    filas=int(filass)
+    columnas=int(columnass)
+  
     celdas=cadena2[5]
     celdas=celdas.replace(" ","")
     celdas=celdas.replace("CELDAS={","")
@@ -37,11 +42,12 @@ def cargar():
         lcoordenadas.append(partes)
        
     
-    print(lcoordenadas[2])
+
+
+  
 
 def graficar():
     agrafica=open("Grafica.dot","w")
-    agrafica.write("digraph G {\n")
     gtitulo='''digraph structs {
 	node [shape=plaintext]
 	struct3 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7">
@@ -49,13 +55,20 @@ def graficar():
 
     agrafica.write(gtitulo+'\n')
 
-    for f in range(filas-1):
+    for f in range(filas):
         agrafica.write('<TR>\n')
-        for c in range(columnas-1):
+        for c in range(columnas):
+            codigo="<TD></TD> \n"
+            for i in lcoordenadas:
+                if int(i[0])==f and int(i[1])==c and i[2]=="TRUE":
+                    codigo='<TD bgcolor="' + str(i[3]) + '"></TD> \n'
+       
 
-            pass
+            agrafica.write(codigo)
+              
         agrafica.write('</TR>\n')
-
+        
+    agrafica.write('</TABLE>>]}')
     agrafica.close()
 
     
@@ -93,7 +106,7 @@ imgframe1.place(x=240,y=90)
 boton1=Button(mframe,text="CARGAR",command=cargar)
 boton1.place(x=10,y=10,width=60,height=30)
 
-boton2=Button(mframe,text="ANALIZAR")
+boton2=Button(mframe,text="ANALIZAR",command=graficar)
 boton2.place(x=80,y=10,width=65,height=30)
 
 boton2=Button(mframe,text="REPORTES")
