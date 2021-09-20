@@ -6,13 +6,63 @@ from tkinter.filedialog import askopenfilename
 
 ventana=Tk()
 
+lcoordenadas=[]
+filas=0
+columnas=0
+
 def cargar():
-    
+    global filas
+    global columnas
     direccion=askopenfilename()
     archivo=open(direccion,'r')
     cadena=archivo.read()
     archivo.close()
-    pass
+    cadena2=cadena.split(";")
+    filass=cadena2[3]
+    columnass=cadena2[4]
+
+    filas=filass
+    columnas=columnass
+    celdas=cadena2[5]
+    celdas=celdas.replace(" ","")
+    celdas=celdas.replace("CELDAS={","")
+    celdas=celdas.replace("}","")
+    celdas=celdas.strip()
+    celdas=celdas.replace("[","")
+    celdas=celdas.replace("],","")
+    coordenadas=celdas.split("\n")
+    for i in range(len(coordenadas)-1):
+        coordenadas[i]=coordenadas[i].strip("\t")
+        partes=coordenadas[i].split(",")
+        lcoordenadas.append(partes)
+       
+    
+    print(lcoordenadas[2])
+
+def graficar():
+    agrafica=open("Grafica.dot","w")
+    agrafica.write("digraph G {\n")
+    gtitulo='''digraph structs {
+	node [shape=plaintext]
+	struct3 [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="7">
+    '''
+
+    agrafica.write(gtitulo+'\n')
+
+    for f in range(filas-1):
+        agrafica.write('<TR>\n')
+        for c in range(columnas-1):
+
+            pass
+        agrafica.write('</TR>\n')
+
+    agrafica.close()
+
+    
+
+
+ 
+
 
 anchoventana=int(920)
 largoventana=int(650)
