@@ -6,66 +6,12 @@ from PIL import ImageTk, Image
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from Analizador import Analizador
+import os
 
 
 ventana=Tk()
 
-lcoordenadas=[]
-filas=0
-columnas=0
 
-documento=""
-
-def cargar():
-    global filas
-    global columnas
-    direccion=askopenfilename()
-    archivo=open(direccion,'r')
-    cadena=archivo.read()
-    archivo.close()
-    cadena2=cadena.split(";")
-    filass=cadena2[3]
-    filass=filass.replace(" ","")
-    filass=filass.replace("FILAS=","")
-    columnass=cadena2[4]
-    columnass=columnass.replace(" ","")
-    columnass=columnass.replace("COLUMNAS=","")
-
-    filas=int(filass)
-    columnas=int(columnass)
-  
-    celdas=cadena2[5]
-    celdas=celdas.replace(" ","")
-    celdas=celdas.replace("CELDAS={","")
-    celdas=celdas.replace("}","")
-    celdas=celdas.strip()
-    celdas=celdas.replace("[","")
-    celdas=celdas.replace("],","")
-    coordenadas=celdas.split("\n")
-    for i in range(len(coordenadas)-1):
-        coordenadas[i]=coordenadas[i].strip("\t")
-        partes=coordenadas[i].split(",")
-        lcoordenadas.append(partes)
-       
-    
-#def cargar2():
-#    global documento
-#    base=[]
-#    contador0=0
-#    contador=0
-#    direccion=askopenfilename()
-#    documento=""
-#    with open(direccion) as f:
-#        for l in f :
-#            contador0=contador0+1
-#
-#    with open(direccion) as f:
-#        for line in f:
-#            contador=contador+1
-#            line=line.replace(" ","")
-#            documento=documento+line
-#            print(line.match("@@@@"))         
-#    print(base)
 
 def leerArchivo(ruta):
     archivo = open(ruta, 'r')
@@ -80,13 +26,49 @@ def cargar2():
     scanner.analizar(codigo)
     scanner.imprimirToken()
     scanner.datos()
-    
+    imagenes=scanner.datos()
+    n=0
+    for i in imagenes:
+            n=n+1
+            nombre="Grafica"+str(n)+".dot"
+            nombre2="Grafica"+str(n)
+            print(i.titulo)
+            agrafica=open(nombre,"w")
+            gtitulo='''digraph structs {
+	        node [shape=plaintext]
+	        struct3 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="50">
+            '''
+            agrafica.write(gtitulo+'\n')
+            for f in range(int(i.fila)):
+                agrafica.write('<TR>\n')
+                for c in range(int(i.columna)):
+                    codigo="<TD></TD> \n"
+                    for j in i.celda:
+                        if int(j.x)==f and int(j.y)==c and j.paso=="TRUE":
+                            codigo='<TD bgcolor="' + str(j.color) + '"></TD> \n'
+                    agrafica.write(codigo)
+                agrafica.write('</TR>\n')
+            agrafica.write('</TABLE>>]}')
+            agrafica.close()
+            #_____________________________Crear imagenes____________________________________________
+            nombre2=nombre2+".jpg"
+            os.system('dot -Tjpg '+ nombre +' -o '+ nombre2) 
+            try:
+                pass
+                 #os.startfile(nombre2)
+
+            except Exception:
+                print ("no se encontro")
+                
 
 
             
   
 
 def graficar():
+    filas=1
+    columnas=1
+    lcoordenadas=[]
     agrafica=open("Grafica.dot","w")
     gtitulo='''digraph structs {
 	node [shape=plaintext]
@@ -112,9 +94,6 @@ def graficar():
     agrafica.close()
 
     
-
-
- 
 
 
 anchoventana=int(920)
