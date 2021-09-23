@@ -240,11 +240,20 @@ class Analizador:
                 if self.listaTokens[i+1].lexema==";":
                     temp.filtro=filtros
                     filtros=[]
-                
+
+            elif tken.tipo=="Separador":
+                imagenes.append(temp)
+                temp=temp=Imagen("",0,0,0,0,"","")
+            
+            elif i==len(self.listaTokens)-1:
+                imagenes.append(temp)
+                temp=temp=Imagen("",0,0,0,0,"","")
 
             i=i+1
-        for i in temp.filtro:
-            print(i)
+
+            
+        for i in imagenes:
+            print(i.titulo)
 
 
 
