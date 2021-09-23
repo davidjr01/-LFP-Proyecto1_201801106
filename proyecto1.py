@@ -7,10 +7,10 @@ import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from Analizador import Analizador
 import os
+from PIL import Image,ImageTk
 
 
 ventana=Tk()
-
 
 
 def leerArchivo(ruta):
@@ -103,6 +103,7 @@ y_ventana = int((ventana.winfo_screenheight() -100 )/2)-(int(largoventana/2))
 posicion = str(anchoventana) + "x" + str(largoventana) + "+" + str(x_ventana) + "+" + str(y_ventana)
 ventana.geometry(posicion)
 ventana.title("INICIO")
+ventana.resizable(False,False)
 
 
 #FRAMES ---------------
@@ -117,6 +118,33 @@ mframe2.place(x=20,y=90)
 imgframe1=Frame(ventana,width=650 ,height=500)
 imgframe1.config(bg="red")
 imgframe1.place(x=240,y=90)
+
+#canva ---------------
+
+
+can=Canvas(imgframe1,bd=2,relief=RIDGE,bg="white",scrollregion=(0,0,1000,1000))
+can.place(x=0,y=0,width=650,height=500)
+
+yscrol=Scrollbar(can,orient=VERTICAL)
+yscrol.pack(side=RIGHT,fill=Y)
+yscrol.config(command=can.yview)
+can.config(yscrollcommand=yscrol.set)
+
+img=Image.open('Grafica1.jpg')
+img=img.resize((400,400),Image.ANTIALIAS)
+
+
+img=ImageTk.PhotoImage(img)
+
+image=can.create_image((105,50),anchor=NW,image=img)
+
+img2=Image.open('Grafica2.jpg')
+img2=img2.resize((400,400),Image.ANTIALIAS)
+
+
+img2=ImageTk.PhotoImage(img2)
+
+imag2e=can.create_image((105,500),anchor=NW,image=img2)
 
 
 #BOTONES  ---------------

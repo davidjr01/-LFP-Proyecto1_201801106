@@ -194,6 +194,7 @@ class Analizador:
 
 
             i=i+1
+            
     def imprimirToken(self):
         archivo = open('hola.txt', 'w')
         
