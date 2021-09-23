@@ -1,5 +1,0 @@
-digraph structs {
-	node [shape=plaintext]
-	struct3 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="50">
-    
-</TABLE>>]}

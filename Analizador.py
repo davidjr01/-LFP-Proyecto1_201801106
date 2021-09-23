@@ -251,10 +251,30 @@ class Analizador:
 
             i=i+1
 
-            
+        n=0
         for i in imagenes:
+            n=n+1
+            nombre="Grafica"+str(n)+".dot"
             print(i.titulo)
 
+            agrafica=open(nombre,"w")
+            gtitulo='''digraph structs {
+	        node [shape=plaintext]
+	        struct3 [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0" CELLPADDING="50">
+            '''
+            agrafica.write(gtitulo+'\n')
+            for f in range(int(i.fila)):
+                agrafica.write('<TR>\n')
+                for c in range(int(i.columna)):
+                    codigo="<TD></TD> \n"
+                    for j in i.celda:
+                        if int(j.x)==f and int(j.y)==c and j.paso=="TRUE":
+                            codigo='<TD bgcolor="' + str(j.color) + '"></TD> \n'
+                    agrafica.write(codigo)
+                agrafica.write('</TR>\n')
+            agrafica.write('</TABLE>>]}')
+            agrafica.close()
+        
 
 
         
