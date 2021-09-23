@@ -79,6 +79,7 @@ def cargar2():
     scanner = Analizador()
     scanner.analizar(codigo)
     scanner.imprimirToken()
+    scanner.datos()
     
 
 

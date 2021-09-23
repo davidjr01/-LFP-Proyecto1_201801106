@@ -1,6 +1,8 @@
 from Token import Token
 from Error import Error
 import re
+from Imagen import Imagen
+from Matriz import Matriz
 
 class Analizador:
     def __init__(self):
@@ -204,6 +206,46 @@ class Analizador:
         for t in self.listaErrores:
              archivo2.write(t.getErrores() + "\n")
         archivo2.close()
+    
+    def datos(self):
+        imagenes=[]
+        filtros=[]
+        i=0
+        temp=Imagen("",0,0,0,0,"","")
+        while i<len(self.listaTokens):
+            tken=self.listaTokens[i]
+            if tken.tipo=="TITULO":
+                temp.titulo=self.listaTokens[i+2].lexema
+            elif tken.tipo=="ANCHO":
+                temp.ancho=self.listaTokens[i+2].lexema
+            elif tken.tipo=="ALTO":
+                temp.alto=self.listaTokens[i+2].lexema
+            elif tken.tipo=="FILAS":
+                temp.fila=self.listaTokens[i+2].lexema
+            elif tken.tipo=="COLUMNAS":
+                temp.columna=self.listaTokens[i+2].lexema
+            elif tken.lexema=="{":
+                lmatriz=[]
+                while tken.lexema!=";":
+                    i=i+1
+                    tken=self.listaTokens[i]
+                    if tken.lexema=="[":
+                        lmatriz.append(Matriz(self.listaTokens[i+1].lexema,self.listaTokens[i+3].lexema,self.listaTokens[i+5].lexema,self.listaTokens[i+7].lexema))
+                        #temp.celda=Matriz(self.listaTokens[i+1].lexema,self.listaTokens[i+3].lexema,self.listaTokens[i+5].lexema,self.listaTokens[i+7].lexema)
+                    elif tken.lexema=="}":
+                        temp.celda=lmatriz
+            
+            elif tken.tipo=="MirrorX" or tken.tipo=="MirrorY" or tken.tipo=="DoubleMirror" :
+                filtros.append(tken.lexema)
+                if self.listaTokens[i+1].lexema==";":
+                    temp.filtro=filtros
+                    filtros=[]
+                
+
+            i=i+1
+        for i in temp.filtro:
+            print(i)
+
 
 
         
