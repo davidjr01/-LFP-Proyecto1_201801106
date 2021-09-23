@@ -1,14 +1,20 @@
+from Analizador import Analizador
 from tkinter import *
 from tkinter import ttk
+from typing import Counter
 from PIL import ImageTk, Image 
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
+from Analizador import Analizador
+
 
 ventana=Tk()
 
 lcoordenadas=[]
 filas=0
 columnas=0
+
+documento=""
 
 def cargar():
     global filas
@@ -42,8 +48,41 @@ def cargar():
         lcoordenadas.append(partes)
        
     
+#def cargar2():
+#    global documento
+#    base=[]
+#    contador0=0
+#    contador=0
+#    direccion=askopenfilename()
+#    documento=""
+#    with open(direccion) as f:
+#        for l in f :
+#            contador0=contador0+1
+#
+#    with open(direccion) as f:
+#        for line in f:
+#            contador=contador+1
+#            line=line.replace(" ","")
+#            documento=documento+line
+#            print(line.match("@@@@"))         
+#    print(base)
+
+def leerArchivo(ruta):
+    archivo = open(ruta, 'r')
+    contenido = archivo.read()
+    archivo.close()
+    return contenido
+
+def cargar2():
+    direccion=askopenfilename()
+    codigo=leerArchivo(direccion)
+    scanner = Analizador()
+    scanner.analizar(codigo)
+    scanner.imprimirToken()
+    
 
 
+            
   
 
 def graficar():
@@ -103,7 +142,7 @@ imgframe1.place(x=240,y=90)
 #BOTONES  ---------------
 
 
-boton1=Button(mframe,text="CARGAR",command=cargar)
+boton1=Button(mframe,text="CARGAR",command=cargar2)
 boton1.place(x=10,y=10,width=60,height=30)
 
 boton2=Button(mframe,text="ANALIZAR",command=graficar)

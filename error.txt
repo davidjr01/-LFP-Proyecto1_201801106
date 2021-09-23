@@ -1,0 +1,1 @@
+Descripcion:  Caracter: * ! no reconocido en el lenguaje.   Tipo:  L�xico   Linea:  132   Columna:   1
