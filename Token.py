@@ -5,8 +5,9 @@ class Token:
         self.linea=linea
         self.columna=columna
     
-    def imprimirToken(self):
-        print('Lexema:   ' +self.lexema+ "   " + "   Tipo:  "+ self.tipo + "   Linea   " + str(self.linea) + "   Columna "+ str(self.columna))
+    def imprimirTokens(self):
+        return ('Lexema:   ' +self.lexema+ "   " + "   Tipo:  "+ self.tipo + "   Linea   " + str(self.linea) + "   Columna "+ str(self.columna))
     
-    def getLexema(self):
-        return 'Lexema:   ' +self.lexema+ "   " + "   Tipo:  "+ self.tipo + "   Linea   " + str(self.linea) + "   Columna "+ str(self.columna)
+   
+    
+

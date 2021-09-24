@@ -1,2 +1,2 @@
-Descripcion:  Caracter: >  no reconocido en el lenguaje.   Tipo:  Léxico   Linea:  202   Columna:   4
-Descripcion:  Caracter: >  no reconocido en el lenguaje.   Tipo:  Léxico   Linea:  202   Columna:   5
+<tr> <th> Caracter: >  no reconocido en el lenguaje.</th><th> Léxico</th><th> 202</th><th> 4</th></tr>
+<tr> <th> Caracter: >  no reconocido en el lenguaje.</th><th> Léxico</th><th> 202</th><th> 5</th></tr>

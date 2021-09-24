@@ -196,17 +196,29 @@ class Analizador:
             i=i+1
             
     def imprimirToken(self):
-        archivo = open('hola.txt', 'w')
-        
-        for t in self.listaTokens:
-            #t.imprimirToken()
-            archivo.write(t.getLexema() + "\n")
+        archivo = open('tokens.txt', 'w')
+        for p in self.listaTokens:
+            lineaa=str(p.linea )+ ""
+            columnaa=str(p.columna)+""
+            archivo.write("<tr> <th> " + p.lexema+"</th>" +"<th> " + p.tipo+"</th>"  +"<th> " + lineaa+"</th>" +"<th> " + columnaa+"</th>"+  "</tr>\n" )
         archivo.close()
+        
 
         archivo2 = open('error.txt', 'w')
         for t in self.listaErrores:
-             archivo2.write(t.getErrores() + "\n")
+            lineaa=str(t.linea )+ ""
+            columnaa=str(t.columna)+""
+            archivo2.write("<tr> <th> " + t.descripcion+"</th>" +"<th> " + t.tipo+"</th>"  +"<th> " + lineaa+"</th>" +"<th> " + columnaa+"</th>"+  "</tr>\n")
+
         archivo2.close()
+        return 1
+
+    def Tokenss(self):
+        return self.listaTokens
+    
+    def Erroress(self):
+        return self.listaErrores
+
     
     def datos(self):
         imagenes=[]
